@@ -1,3 +1,6 @@
-const nombre: string = 'alo'
+import Server from "./src/models/server";
+import dotenv from 'dotenv'
 
-console.log(nombre)
+dotenv.config()
+
+const server = new Server()
