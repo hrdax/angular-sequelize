@@ -22,6 +22,7 @@ class Server {
                 msg: 'API WORKING'
             });
         });
+        this.app.use('/api/productos', routerProduct);
     }
 }
 exports.default = Server;

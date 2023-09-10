@@ -1,4 +1,5 @@
 import express, { Application, Request, Response } from 'express'
+import routeProduct from '../routes/product'
 
 class Server {
     private app: express.Application
@@ -21,6 +22,7 @@ class Server {
                 msg: 'API WORKING'
             })
         })
+        this.app.use('/api/productos', routerProduct)
     }
 }
 
