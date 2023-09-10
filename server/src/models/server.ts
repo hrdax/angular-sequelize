@@ -32,8 +32,13 @@ class Server {
     }
 
     async dbConnect() {
-        await db.authenticate()
-        console.log('db conectada')
+        try {
+            await db.authenticate()
+            console.log('db conectada')
+        } catch (e) {
+            console.log(e)
+            console.log('db no conectada error')
+        }
     }
 }
 
