@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
+import { Product } from 'src/app/interfaces/product';
 
 @Component({
   selector: 'app-add-edit-product',
@@ -18,7 +19,15 @@ export class AddEditProductComponent {
     })
   }
   addProduct(){
-    console.log('alo')
+    const product: Product = {
+      name: this.form.value.name,
+      description: this.form.value.description,
+      price: this.form.value.price,
+      stock: this.form.value.stock,
+    }
+    console.log(product)
+    
+
   }
 
 }
