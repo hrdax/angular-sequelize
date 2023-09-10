@@ -9,6 +9,7 @@ class Server {
         this.app = express()
         this.port = process.env.PORT || '3001'
         this.listen()
+        this.middleware()
         this.routes()
     }    
     listen() {
@@ -23,6 +24,9 @@ class Server {
             })
         })
         this.app.use('/api/productos', routeProduct)
+    }
+    middleware() {
+        this.app.use(express.json())
     }
 }
 

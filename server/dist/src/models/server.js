@@ -10,6 +10,7 @@ class Server {
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || '3001';
         this.listen();
+        this.middleware();
         this.routes();
     }
     listen() {
@@ -24,6 +25,9 @@ class Server {
             });
         });
         this.app.use('/api/productos', product_1.default);
+    }
+    middleware() {
+        this.app.use(express_1.default.json());
     }
 }
 exports.default = Server;
