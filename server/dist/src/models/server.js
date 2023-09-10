@@ -9,10 +9,18 @@ class Server {
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || '3001';
         this.listen();
+        this.routes();
     }
     listen() {
         this.app.listen(this.port, () => {
             console.log(`Aplicacion corriendo en el puerto ${this.port}`);
+        });
+    }
+    routes() {
+        this.app.get('/', (req, res) => {
+            res.json({
+                msg: 'API WORKING'
+            });
         });
     }
 }
