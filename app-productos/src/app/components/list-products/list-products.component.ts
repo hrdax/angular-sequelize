@@ -8,8 +8,8 @@ import { Product } from 'src/app/interfaces/product';
 })
 export class ListProductsComponent {
   listProducts: Product[] = [
-    { name: 'Coca Cola', description: 'Bebida', price: 800, stock: 5 },
-    { name: 'Cola Cao', description: 'Cereal con Chocolate', price: 1000, stock: 10 },
+    { id:1 , name: 'Coca Cola', description: 'Bebida', price: 800, stock: 5 },
+    { id:2 , name: 'Cola Cao', description: 'Cereal con Chocolate', price: 1000, stock: 10 },
 
   ]
 
