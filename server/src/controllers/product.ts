@@ -1,9 +1,16 @@
 import express, { Request, Response } from 'express'
+import Producto from '../models/product'
 
-export const getProducts = (req: Request, res: Response) => {
-    res.json({
-        msg: 'get products'
-    })
+export const getProducts = async (req: Request, res: Response) => {
+    try {
+        const listProducts = await Producto.findAll()
+        res.json(listProducts)
+        
+    } catch (e) {
+        console.log('error', e)
+    }
+
+    
 }
 
 export const getProduct = (req: Request, res: Response) => {
