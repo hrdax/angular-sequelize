@@ -22,7 +22,7 @@ class Server {
                 msg: 'API WORKING'
             })
         })
-        this.app.use('/api/productos', routerProduct)
+        this.app.use('/api/productos', routeProduct)
     }
 }
 
