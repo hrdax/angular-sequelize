@@ -12,6 +12,10 @@ const routes: Routes = [
     component: AddEditProductComponent
   },
   {
+    path: 'edit/:id',
+    component: AddEditProductComponent
+  },
+  {
     path: '**', 
     redirectTo: '', 
     pathMatch: 'full'
