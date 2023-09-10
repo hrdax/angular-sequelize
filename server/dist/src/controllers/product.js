@@ -24,8 +24,9 @@ exports.deleteProduct = deleteProduct;
 const postProduct = (req, res) => {
     const { body } = req;
     res.json({
-        msg: 'delete product',
+        msg: 'post product',
         body
     });
+    console.log(body);
 };
 exports.postProduct = postProduct;

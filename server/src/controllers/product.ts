@@ -23,7 +23,8 @@ export const deleteProduct = (req: Request, res: Response) => {
 export const postProduct = (req: Request, res: Response) => {
     const { body } = req
     res.json({
-        msg: 'delete product',
+        msg: 'post product',
         body
     })
+    console.log(body)
 }

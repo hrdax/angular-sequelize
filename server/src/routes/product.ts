@@ -6,6 +6,6 @@ const router = Router()
 router.get('/', getProducts)
 router.get('/:id', getProduct)
 router.get('/:id', deleteProduct)
-router.get('/', postProduct)
+router.post('/', postProduct)
 
 export default router
