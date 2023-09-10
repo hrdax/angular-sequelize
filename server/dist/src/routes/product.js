@@ -7,4 +7,5 @@ router.get('/', product_1.getProducts);
 router.get('/:id', product_1.getProduct);
 router.get('/:id', product_1.deleteProduct);
 router.post('/', product_1.postProduct);
+router.post('/:id', product_1.updateProduct);
 exports.default = router;
