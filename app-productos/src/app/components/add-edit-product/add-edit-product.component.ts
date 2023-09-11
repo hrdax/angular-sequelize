@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/interfaces/product';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -10,16 +10,22 @@ import { ProductService } from 'src/app/services/product.service';
   templateUrl: './add-edit-product.component.html',
   styleUrls: ['./add-edit-product.component.css']
 })
-export class AddEditProductComponent {
+export class AddEditProductComponent implements OnInit{
   form: FormGroup;
-  
-  constructor(private fb: FormBuilder, private _productService: ProductService, private router: Router) {
+  id: number
+  accion: string = 'Agregar'
+
+  constructor(private fb: FormBuilder,
+    private _productService: ProductService,
+    private router: Router,
+    private aRoute: ActivatedRoute) {
     this.form = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
       price: ['', Validators.required],
       stock: ['', Validators.required],
     })
+    this.id = Number(aRoute.snapshot.paramMap.get('id'))
   }
   addProduct(){
     const product: Product = {
@@ -28,9 +34,35 @@ export class AddEditProductComponent {
       price: this.form.value.price,
       stock: this.form.value.stock,
     }
-    this._productService.saveProduct(product).subscribe(() => {})
-    this.router.navigate(['/'])
 
+    if(this.id !== 0){
+      product.id = this.id
+      this._productService.updateProduct(this.id, product).subscribe(() => {
+      this.router.navigate(['/'])
+    })
+    } else {
+      this._productService.saveProduct(product).subscribe(() => {})
+      this.router.navigate(['/'])
+    }
+  }
+  
+  getProduct(id: number){
+    this._productService.getProduct(id).subscribe((data: Product) =>{
+      this.form.setValue({
+        name: data.name,
+        description: data.description,
+        price: data.price,
+        stock: data.stock
+      })
+    })
+    
+  }
+
+  ngOnInit(): void {
+    if(this.id != 0) {
+      this.accion = 'Editar'
+      this.getProduct(this.id)
+    }
   }
 
 }

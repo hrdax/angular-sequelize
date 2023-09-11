@@ -1,7 +1,7 @@
 <div class="row mt-1">
     <div class="col-lg-4 offset-lg-4">
         <div class="card border-primary mb-3" style="max-width: 25rem;">
-            <div class="card-header text-center">Agregar Producto</div>
+            <div class="card-header text-center">{{ accion }} Producto</div>
             <div class="card-body">
                 <form [formGroup]="form" (ngSubmit)="addProduct()">
                     <input formControlName="name" type="text" class="form-control" placeholder="Ingrese Nombre">
@@ -25,7 +25,7 @@
                             <button routerLink="/" type="button" class="btn btn-danger">Cancelar</button>
                         </div>
                         <div class="col-lg-6">
-                            <button [disabled]="form.invalid" type="submit" class="btn btn-success">Agregar</button>
+                            <button [disabled]="form.invalid" type="submit" class="btn btn-success">{{ accion }}</button>
                         </div>
                     </div>
                 </form>
