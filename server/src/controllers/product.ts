@@ -13,11 +13,16 @@ export const getProducts = async (req: Request, res: Response) => {
     
 }
 
-export const getProduct = (req: Request, res: Response) => {
-    res.json({
-        msg: 'get product',
-        id: req.params.id
-    })
+export const getProduct = async (req: Request, res: Response) => {
+    const { id } = req.params
+    const product = await Producto.findByPk(id)
+    if(product) {
+        res.json(product)
+    } else {
+        res.status(404).json({
+            msg: `No existe un producto con id ${id}`
+        })
+    }
 }
 
 export const deleteProduct = (req: Request, res: Response) => {
