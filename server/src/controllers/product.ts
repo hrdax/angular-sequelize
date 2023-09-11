@@ -56,10 +56,29 @@ export const postProduct = async (req: Request, res: Response) => {
     }
 }
 
-export const updateProduct = (req: Request, res: Response) => {
+export const updateProduct = async (req: Request, res: Response) => {
     const { body } = req
-    res.json({
-        msg: 'post product',
-        body
-    })
+    const {  id } = req.params
+
+    const product = await Producto.findByPk(id)
+
+    try{
+        if (product) {
+            await product.update(body)
+            res.json({
+                msg: 'El producto fue actualizado con exito'
+            })
+        } else {
+            res.status(404).json({
+                msg: `No existe un producto con el id ${id}`
+            })
+        }
+    } catch (error) {
+        console.log(error)
+        res.json({
+            msg: 'Error de update'
+        })
+    }
+
+    
 }
