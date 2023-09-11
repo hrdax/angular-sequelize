@@ -41,14 +41,19 @@ export const deleteProduct = async (req: Request, res: Response) => {
     }
 }
 
-export const postProduct = (req: Request, res: Response) => {
+export const postProduct = async (req: Request, res: Response) => {
     const { body } = req
-    const { id } = req.params
-    res.json({
-        msg: 'update product',
-        id,
-        body
-    })
+
+    try {
+        await Producto.create(body)
+        res.json({
+            msg: `El producto fue agregado con exito`
+        })
+    } catch (e) {
+        res.json({
+            msg: `Hubo un error`
+        })
+    }
 }
 
 export const updateProduct = (req: Request, res: Response) => {
