@@ -24,4 +24,10 @@ export class ListProductsComponent implements OnInit{
     })
   }
 
+  deleteProduct(id:number) {
+    this._productService.deleteProduct(id).subscribe(() => {
+      this.getListProducts()
+    })
+  }
+
 }

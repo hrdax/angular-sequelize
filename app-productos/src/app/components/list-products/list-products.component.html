@@ -22,7 +22,7 @@
             <td>{{ item.stock }}</td>
             <td>
               <button [routerLink]="['/edit', item.id]" type="button" class="btn btn-outline-info btn-sm">Editar</button>
-              <button [routerLink]="['/delete', item.id]" type="button" class="btn btn-outline-danger btn-sm ms-2">Eliminar</button>
+              <button (click)="deleteProduct(item.id!)" type="button" class="btn btn-outline-danger btn-sm ms-2">Eliminar</button>
             </td>
         </tr>
         </tbody>
