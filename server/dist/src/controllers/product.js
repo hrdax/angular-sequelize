@@ -24,35 +24,72 @@ const getProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.getProducts = getProducts;
-const getProduct = (req, res) => {
-    res.json({
-        msg: 'get product',
-        id: req.params.id
-    });
-};
+const getProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const product = yield product_1.default.findByPk(id);
+    if (product) {
+        res.json(product);
+    }
+    else {
+        res.status(404).json({
+            msg: `No existe un producto con id ${id}`
+        });
+    }
+});
 exports.getProduct = getProduct;
-const deleteProduct = (req, res) => {
-    res.json({
-        msg: 'delete product',
-        id: req.params.id
-    });
-};
+const deleteProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const product = yield product_1.default.findByPk(id);
+    if (product) {
+        yield product.destroy();
+        res.json({
+            msg: 'El producto fue eliminado con exito!'
+        });
+    }
+    else {
+        res.status(404).json({
+            msg: `No existe un producto con id ${id}`
+        });
+    }
+});
 exports.deleteProduct = deleteProduct;
-const postProduct = (req, res) => {
+const postProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { body } = req;
+    try {
+        yield product_1.default.create(body);
+        res.json({
+            msg: `El producto fue agregado con exito`
+        });
+    }
+    catch (e) {
+        res.json({
+            msg: `Hubo un error`
+        });
+    }
+});
+exports.postProduct = postProduct;
+const updateProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = req;
     const { id } = req.params;
-    res.json({
-        msg: 'update product',
-        id,
-        body
-    });
-};
-exports.postProduct = postProduct;
-const updateProduct = (req, res) => {
-    const { body } = req;
-    res.json({
-        msg: 'post product',
-        body
-    });
-};
+    const product = yield product_1.default.findByPk(id);
+    try {
+        if (product) {
+            yield product.update(body);
+            res.json({
+                msg: 'El producto fue actualizado con exito'
+            });
+        }
+        else {
+            res.status(404).json({
+                msg: `No existe un producto con el id ${id}`
+            });
+        }
+    }
+    catch (error) {
+        console.log(error);
+        res.json({
+            msg: 'Error de update'
+        });
+    }
+});
 exports.updateProduct = updateProduct;
